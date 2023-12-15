@@ -45,7 +45,7 @@ def generate_response(cleaned_input, model):
 def principal():
     st.title("Formateador de Entrevistas")
 
-    genai.configure(api_key='YOUR_GEMINI_API_KEY')  # Replace with your Google GEMINI API key
+    genai.configure(api_key='AIzaSyCezVerubEzQc9JHz3V8hofpAlSIJXGxFQ')  # Replace with your Google GEMINI API key
 
     # Choose the Gemini model
     model = genai.GenerativeModel('gemini-pro')
