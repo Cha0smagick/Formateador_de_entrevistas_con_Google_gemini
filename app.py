@@ -1,9 +1,9 @@
 import os
 import streamlit as st
 import google.generativeai as genai
-from IPython.display import display, Markdown
+import re
 
-# TERMINATOR
+# Formateador de entrevistas.
 
 error_flag = False  # Global variable to track error display
 
@@ -76,6 +76,9 @@ def principal():
                     model
                 )
 
+                # Decode ASCII characters
+                respuesta_bot = respuesta_bot.encode().decode('unicode_escape')
+
                 # Agrega la respuesta formateada a la salida
                 salida_formateada += respuesta_bot + "\n"
 
@@ -85,6 +88,14 @@ def principal():
             # Muestra la salida formateada
             st.success("Formateo completado")
             st.text_area("Segmento de Entrevista Formateado:", salida_formateada)
+
+            # Botón para descargar la respuesta formateada
+            download_button = st.download_button(
+                label="Descargar Respuesta",
+                data=salida_formateada,
+                file_name="respuesta_formateada.txt",
+                key="download_button"
+            )
 
 if __name__ == "__main__":
     principal()
