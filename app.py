@@ -3,7 +3,7 @@ import streamlit as st
 import google.generativeai as genai
 import re
 
-# Formateador de entrevistas.
+# TERMINATOR
 
 error_flag = False  # Global variable to track error display
 
@@ -24,7 +24,7 @@ def generate_response(cleaned_input, model):
         for chunk in response:
             full_response += chunk.text
 
-        return full_response
+        return full_response.encode().decode('utf-8')
 
     except Exception as e:
         error_message = str(e)
@@ -45,7 +45,7 @@ def generate_response(cleaned_input, model):
 def principal():
     st.title("Formateador de Entrevistas")
 
-    genai.configure(api_key='your_gemini_api_key')  # Replace with your Google GEMINI API key
+    genai.configure(api_key='YOUR_GEMINI_API_KEY')  # Replace with your Google GEMINI API key
 
     # Choose the Gemini model
     model = genai.GenerativeModel('gemini-pro')
@@ -75,9 +75,6 @@ def principal():
                     f"No hay comentarios ni indicaciones. Simplemente sigue las instrucciones: lee línea por línea, frase por frase, identifica y reconoce los roles del entrevistador y el entrevistado en el siguiente texto de un segmento de entrevista, y formatea la salida como ese segmento de entrevista con etiquetas precediendo cada línea, palabra o frase con etiquetas de entrevistador y entrevistado. Presenta el mismo orden de desarrollo del segmento de entrevista con un salto de línea entre cada uno. Etiqueta cada palabra, línea, frase o párrafo según corresponda: {chunk}",
                     model
                 )
-
-                # Decode ASCII characters
-                respuesta_bot = respuesta_bot.encode().decode('unicode_escape')
 
                 # Agrega la respuesta formateada a la salida
                 salida_formateada += respuesta_bot + "\n"
