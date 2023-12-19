@@ -1,16 +1,10 @@
 import os
 import streamlit as st
 import google.generativeai as genai
-import re
 
 # TERMINATOR
 
 error_flag = False  # Global variable to track error display
-
-def clean_text(text):
-    # Clean punctuation and special characters using regular expressions
-    cleaned_text = re.sub(r'[^a-zA-Z0-9\s]', '', text)
-    return cleaned_text
 
 def generate_response(cleaned_input, model):
     global error_flag  # Use the global error_flag variable
@@ -61,8 +55,8 @@ def principal():
         if st.button("Iniciar Formateo"):
             st.info("Formateo en progreso...")
 
-            # Divide el contenido en chunks de 1000 palabras
-            tamano_chunk = 1000
+            # Divide el contenido en chunks de 1500 palabras
+            tamano_chunk = 1500
             chunks = [contenido[i:i + tamano_chunk] for i in range(0, len(contenido), tamano_chunk)]
 
             # Inicializa la barra de progreso
